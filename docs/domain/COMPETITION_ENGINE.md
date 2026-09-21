@@ -15,3 +15,5 @@ The initial catalogue is `RegularLeagueStage`, `GroupStage`, `PlayoffStage`, `Pl
 A season uses a `CompetitionFormatVersion`. Once result entry starts, its regulations are locked; a future change creates a new version and never overwrites historical calculations.
 
 A confirmed individual match changes its team-match score. A confirmed team match triggers projectors for stage standings and player, team, and club statistics. A bulk import may mark a stage for a complete rebuild. Rankings and standings always read a projection.
+
+The first league-stage policy awards 2 standings points to the winner and 1 to the loser of every confirmed team match, regardless of a 4:0 through 4:3 final score. See [the policy specification](STANDINGS_POLICY_TWO_ONE.md).

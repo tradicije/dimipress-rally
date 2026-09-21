@@ -9,7 +9,7 @@
 ## Phase 1: one team match
 
 - Clubs, teams, players, and registrations.
-- Team-match format, lineup validation, singles, doubles, sets, and confirmed results.
+- First-to-four team-match format, lineup validation, singles, doubles, sets, and confirmed results.
 - Tests for match formats and score aggregation.
 
 ## Phase 2: league season
@@ -35,3 +35,5 @@
 - Multisite and pilot-installation integration tests.
 
 Every phase requires concrete business examples and tests before scope expands.
+
+Retirements, walkovers, forfeits, no-shows, and administrative result changes are explicitly deferred from Phase 1. They require a separately specified result-state model before implementation.
