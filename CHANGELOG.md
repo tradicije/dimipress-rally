@@ -8,6 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- `SetScore` domain value object and PHPUnit coverage for standard and deuce set scoring.
 - Initial PSR-4 plugin skeleton with a WordPress bootstrap adapter.
 - Composer development toolchain: PHPUnit, PHPStan, and PHPCS.
 - Domain architecture, glossary, roadmap, ADRs, contribution guide, security policy, and AGPL-3.0-or-later license.
