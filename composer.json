@@ -1,0 +1,22 @@
+{
+  "name": "dimipress/rally",
+  "description": "A WordPress table-tennis competition engine.",
+  "type": "wordpress-plugin",
+  "license": "GPL-3.0-or-later",
+  "require": {
+    "php": "^8.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "DimiPress\\Rally\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DimiPress\\Rally\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
