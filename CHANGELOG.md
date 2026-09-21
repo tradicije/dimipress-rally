@@ -8,6 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- Team-match roster, singles-lineup, doubles-lineup, and substitution-window domain models.
 - `FirstToFourTeamMatch` domain aggregate for the initial fixed rubber order, early completion, and conditional doubles rubber.
 - `IndividualMatch` domain aggregate for best-of-five-set singles and doubles rubbers.
 - `SetScore` domain value object and PHPUnit coverage for standard and deuce set scoring.

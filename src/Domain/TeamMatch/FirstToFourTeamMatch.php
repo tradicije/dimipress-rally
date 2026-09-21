@@ -73,4 +73,9 @@ final class FirstToFourTeamMatch
             && $this->scoreFor(TeamMatchSide::Home) === 3
             && $this->scoreFor(TeamMatchSide::Away) === 3;
     }
+
+    public function isSubstitutionWindowOpen(): bool
+    {
+        return !$this->isCompleted() && count($this->rubberWinners) === 3;
+    }
 }
