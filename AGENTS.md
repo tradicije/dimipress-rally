@@ -25,3 +25,5 @@ This repository is a WordPress plugin, but its business engine is not WordPress-
 2. Write a unit test for a business rule before implementing its use case.
 3. Do not add a generic rules DSL without a concrete regulation and tests that justify it.
 4. Preserve history: rules used by a started season or stage must not be retroactively changed.
+5. Update `CHANGELOG.md` for every change to plugin functionality, architecture, persistence, public API, dependencies, or operational behavior.
+6. Every completed handoff must include one proposed imperative-style commit message.

@@ -14,11 +14,18 @@ Read the [architecture](docs/architecture/ARCHITECTURE.md), [domain glossary](do
 - Use custom `dpr_` tables for competition data.
 - Keep public blocks, REST endpoints, and shortcodes free of business calculations.
 - Keep all repository-facing documentation and code comments in English.
+- Update `CHANGELOG.md` for every notable plugin change.
 
 ## Pull requests
 
-Keep each change small and coherent. Explain the use case, the domain rule it changes, migration impact, and tests performed. Do not mix refactoring with unrelated behavior changes.
+Keep each change small and coherent. Explain the use case, the domain rule it changes, migration impact, and tests performed. Update `CHANGELOG.md`, and propose an imperative-style commit message. Do not mix refactoring with unrelated behavior changes.
 
 ## Local checks
 
-The initial quality toolchain will be introduced in Roadmap Phase 0. Until then, run Composer's autoload validation when Composer is available and manually review layer-boundary compliance.
+After installing development dependencies, run:
+
+```bash
+composer check
+```
+
+This runs the PHPUnit, PHPStan, and coding-standard checks. The test suite grows with each use case.

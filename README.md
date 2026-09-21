@@ -19,6 +19,9 @@ Rally is a generic product. STKB.rs is a pilot installation, not part of the dom
 - [Competition engine](docs/domain/COMPETITION_ENGINE.md)
 - [First-to-four match format](docs/domain/MATCH_FORMAT_FIRST_TO_FOUR.md)
 - [Initial standings policy](docs/domain/STANDINGS_POLICY_TWO_ONE.md)
+- [Initial standings tie-break policy](docs/domain/STANDINGS_TIE_BREAK_POLICY.md)
+- [Acceptance test specifications](docs/testing/ACCEPTANCE_TESTS.md)
+- [Changelog](CHANGELOG.md)
 - [Roadmap](docs/product/ROADMAP.md)
 - [Architecture decisions](docs/adr/)
 
