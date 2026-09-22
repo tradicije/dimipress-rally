@@ -2,7 +2,7 @@
   "name": "dimipress/rally",
   "description": "A WordPress table-tennis competition engine.",
   "type": "wordpress-plugin",
-  "license": "GPL-3.0-or-later",
+  "license": "AGPL-3.0-or-later",
   "require": {
     "php": "^8.2"
   },

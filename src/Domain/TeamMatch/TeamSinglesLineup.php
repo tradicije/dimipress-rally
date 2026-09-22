@@ -71,7 +71,7 @@ final readonly class TeamSinglesLineup
     /**
      * @param array<string, PlayerId> $replacementsBySlot
      */
-    public function replaceAfterThirdRubber(array $replacementsBySlot): self
+    public function withReplacements(array $replacementsBySlot): self
     {
         $updatedPlayers = $this->playersBySlot;
 
@@ -88,5 +88,13 @@ final readonly class TeamSinglesLineup
         }
 
         return new self($this->roster, $updatedPlayers);
+    }
+
+    /**
+     * @return list<PlayerId>
+     */
+    public function players(): array
+    {
+        return array_values($this->playersBySlot);
     }
 }

@@ -20,5 +20,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Changed
 
+- Corrected completed-set validation to reject scores reached after the set should already have ended.
+- Defined the in-season individual-match differential consistently with LibreTT's `meckol` calculation.
+- Aligned Composer package metadata with the project's AGPL-3.0-or-later license.
+- Ignored generated dependency and test-cache directories for future Git publishing.
+- Made the team-match aggregate own both singles lineups and enforce its one-time substitution window.
 - Defined Gutenberg blocks as the primary public presentation API; shortcodes are compatibility adapters only.
 - Defined custom `{$wpdb->prefix}dpr_*` tables as the persistence model for competition data.

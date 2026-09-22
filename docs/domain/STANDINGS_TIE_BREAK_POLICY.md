@@ -2,9 +2,9 @@
 
 ## In-season ranking
 
-While a season is active, teams tied on standings points are ordered by `match ratio`: the ratio of individual-match wins to individual-match losses across confirmed team matches in the stage.
+While a season is active, teams tied on standings points are ordered by the individual-match differential across confirmed team matches in the stage: individual matches won minus individual matches lost. For example, a 4:2 team-match win contributes `+2`, while a 2:4 loss contributes `-2`. This follows LibreTT's existing `meckol` calculation.
 
-The exact representation, comparison of zero-loss records, and any subsequent tie-break criteria are not yet specified. The projection must preserve the underlying wins and losses so that the policy remains rebuildable.
+This value is a difference, not a division-based ratio. The projection must preserve the underlying wins and losses so that the policy remains rebuildable. Any subsequent tie-break criteria remain to be specified.
 
 ## Final ranking
 

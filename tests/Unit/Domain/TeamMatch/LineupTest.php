@@ -25,7 +25,7 @@ final class LineupTest extends TestCase
         $roster = $this->rosterWith($playerA, $playerB, $playerC, $reserve);
         $lineup = TeamSinglesLineup::home($roster, $playerA, $playerB, $playerC);
 
-        $updatedLineup = $lineup->replaceAfterThirdRubber([
+        $updatedLineup = $lineup->withReplacements([
             PlayerSlot::HomeA->value => $reserve,
         ]);
 
@@ -42,7 +42,7 @@ final class LineupTest extends TestCase
         $roster = $this->rosterWith($playerA, $playerB, $playerC, $reserve);
         $lineup = TeamSinglesLineup::home($roster, $playerA, $playerB, $playerC);
 
-        $lineup->replaceAfterThirdRubber([
+        $lineup->withReplacements([
             PlayerSlot::HomeA->value => $reserve,
         ]);
         $doubles = DoublesLineup::fromRoster($roster, $playerA, $reserve);
@@ -53,7 +53,7 @@ final class LineupTest extends TestCase
 
     public function testTheSubstitutionWindowIsOpenOnlyAfterTheThirdRubber(): void
     {
-        $teamMatch = new FirstToFourTeamMatch();
+        $teamMatch = $this->teamMatch();
 
         self::assertFalse($teamMatch->isSubstitutionWindowOpen());
 
@@ -66,6 +66,47 @@ final class LineupTest extends TestCase
         $teamMatch->recordNextRubberWin(TeamMatchSide::Away);
 
         self::assertFalse($teamMatch->isSubstitutionWindowOpen());
+    }
+
+    public function testItAppliesSubstitutionsOnlyOnceInTheAllowedWindow(): void
+    {
+        $teamMatch = $this->teamMatch();
+        $reserve = PlayerId::fromInt(4);
+
+        foreach (range(1, 3) as $_) {
+            $teamMatch->recordNextRubberWin(TeamMatchSide::Home);
+        }
+
+        $teamMatch->applySubstitutions([PlayerSlot::HomeA->value => $reserve], []);
+
+        self::assertSame($reserve, $teamMatch->homeLineup()->playerIn(PlayerSlot::HomeA));
+        self::assertFalse($teamMatch->isSubstitutionWindowOpen());
+
+        $this->expectException(DomainException::class);
+        $teamMatch->applySubstitutions([PlayerSlot::HomeB->value => $reserve], []);
+    }
+
+    public function testItRejectsSubstitutionsBeforeRubberThree(): void
+    {
+        $teamMatch = $this->teamMatch();
+
+        $this->expectException(DomainException::class);
+        $teamMatch->applySubstitutions([PlayerSlot::HomeA->value => PlayerId::fromInt(4)], []);
+    }
+
+    public function testItRejectsSubstitutionsAfterRubberFour(): void
+    {
+        $teamMatch = $this->teamMatch();
+
+        $winners = [TeamMatchSide::Home, TeamMatchSide::Away, TeamMatchSide::Home, TeamMatchSide::Away];
+
+        foreach ($winners as $winner) {
+            $teamMatch->recordNextRubberWin($winner);
+        }
+
+        self::assertFalse($teamMatch->isCompleted());
+        $this->expectException(DomainException::class);
+        $teamMatch->applySubstitutions([PlayerSlot::HomeA->value => PlayerId::fromInt(4)], []);
     }
 
     public function testItRejectsAnUnregisteredDoublesPlayer(): void
@@ -101,5 +142,35 @@ final class LineupTest extends TestCase
         }
 
         return $roster;
+    }
+
+    private function teamMatch(): FirstToFourTeamMatch
+    {
+        $homeRoster = $this->rosterWith(
+            PlayerId::fromInt(1),
+            PlayerId::fromInt(2),
+            PlayerId::fromInt(3),
+            PlayerId::fromInt(4),
+        );
+        $awayRoster = $this->rosterWith(
+            PlayerId::fromInt(5),
+            PlayerId::fromInt(6),
+            PlayerId::fromInt(7),
+        );
+
+        return new FirstToFourTeamMatch(
+            TeamSinglesLineup::home(
+                $homeRoster,
+                PlayerId::fromInt(1),
+                PlayerId::fromInt(2),
+                PlayerId::fromInt(3),
+            ),
+            TeamSinglesLineup::away(
+                $awayRoster,
+                PlayerId::fromInt(5),
+                PlayerId::fromInt(6),
+                PlayerId::fromInt(7),
+            ),
+        );
     }
 }

@@ -38,6 +38,8 @@ A set is normally won at 11 points. At 10:10, play continues until one side lead
 
 There is one substitution window only: after rubber 3 and before rubber 4. Any number of slot substitutions may be made in that window.
 
+All substitutions for both teams are submitted together as one operation. Once applied, the window is closed, even before rubber 4 starts. No substitution is required if neither team chooses to use the window.
+
 A replacement takes over the replaced player's slot for all remaining scheduled singles rubbers. For example, a player replacing `A` after rubber 3 plays rubber 4 as `A` against `X`.
 
 Any player in `TeamMatchRoster` may play doubles, including a player who was not selected for singles and a player substituted out of a singles slot. Doubles eligibility is based on the roster, not the active singles lineup.

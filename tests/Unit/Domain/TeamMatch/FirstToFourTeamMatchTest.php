@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace DimiPress\Rally\Tests\Unit\Domain\TeamMatch;
 
+use DimiPress\Rally\Domain\Player\PlayerId;
 use DimiPress\Rally\Domain\TeamMatch\FirstToFourTeamMatch;
 use DimiPress\Rally\Domain\TeamMatch\PlayerSlot;
 use DimiPress\Rally\Domain\TeamMatch\RubberDiscipline;
+use DimiPress\Rally\Domain\TeamMatch\TeamMatchRoster;
 use DimiPress\Rally\Domain\TeamMatch\TeamMatchSide;
+use DimiPress\Rally\Domain\TeamMatch\TeamSinglesLineup;
 use DomainException;
 use PHPUnit\Framework\TestCase;
 
@@ -15,7 +18,7 @@ final class FirstToFourTeamMatchTest extends TestCase
 {
     public function testItUsesTheSpecifiedSinglesOrder(): void
     {
-        $teamMatch = new FirstToFourTeamMatch();
+        $teamMatch = $this->teamMatch();
 
         $first = $teamMatch->nextRubber();
 
@@ -36,7 +39,7 @@ final class FirstToFourTeamMatchTest extends TestCase
 
     public function testItEndsImmediatelyWhenAClubReachesFourWins(): void
     {
-        $teamMatch = new FirstToFourTeamMatch();
+        $teamMatch = $this->teamMatch();
 
         foreach (range(1, 4) as $_) {
             $teamMatch->recordNextRubberWin(TeamMatchSide::Home);
@@ -51,7 +54,7 @@ final class FirstToFourTeamMatchTest extends TestCase
 
     public function testItRequiresDoublesOnlyAtThreeAllAfterSixSingles(): void
     {
-        $teamMatch = new FirstToFourTeamMatch();
+        $teamMatch = $this->teamMatch();
 
         $rubberWinners = [
             TeamMatchSide::Home,
@@ -77,7 +80,7 @@ final class FirstToFourTeamMatchTest extends TestCase
 
     public function testItRejectsAResultAfterTheTeamMatchHasEnded(): void
     {
-        $teamMatch = new FirstToFourTeamMatch();
+        $teamMatch = $this->teamMatch();
 
         foreach (range(1, 4) as $_) {
             $teamMatch->recordNextRubberWin(TeamMatchSide::Home);
@@ -86,5 +89,34 @@ final class FirstToFourTeamMatchTest extends TestCase
         $this->expectException(DomainException::class);
 
         $teamMatch->recordNextRubberWin(TeamMatchSide::Away);
+    }
+
+    private function teamMatch(): FirstToFourTeamMatch
+    {
+        $homeRoster = new TeamMatchRoster();
+        $awayRoster = new TeamMatchRoster();
+
+        foreach ([1, 2, 3] as $id) {
+            $homeRoster->register(PlayerId::fromInt($id));
+        }
+
+        foreach ([4, 5, 6] as $id) {
+            $awayRoster->register(PlayerId::fromInt($id));
+        }
+
+        return new FirstToFourTeamMatch(
+            TeamSinglesLineup::home(
+                $homeRoster,
+                PlayerId::fromInt(1),
+                PlayerId::fromInt(2),
+                PlayerId::fromInt(3),
+            ),
+            TeamSinglesLineup::away(
+                $awayRoster,
+                PlayerId::fromInt(4),
+                PlayerId::fromInt(5),
+                PlayerId::fromInt(6),
+            ),
+        );
     }
 }

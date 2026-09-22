@@ -32,10 +32,11 @@ final readonly class SetScore
         $margin = abs($homePoints - $awayPoints);
 
         if (
-            $winningPoints < self::MINIMUM_WINNING_POINTS
-            || $margin < self::MINIMUM_WINNING_MARGIN
+            ($winningPoints === self::MINIMUM_WINNING_POINTS && $margin < self::MINIMUM_WINNING_MARGIN)
+            || ($winningPoints > self::MINIMUM_WINNING_POINTS && $margin !== self::MINIMUM_WINNING_MARGIN)
+            || $winningPoints < self::MINIMUM_WINNING_POINTS
         ) {
-            throw new DomainException('A completed set requires 11 points and a two-point margin.');
+            throw new DomainException('A completed set must end when a side first reaches 11 with a two-point lead.');
         }
 
         return new self($homePoints, $awayPoints);
