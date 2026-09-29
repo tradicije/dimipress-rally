@@ -11,6 +11,7 @@ Rally is a generic product. STKB.rs is a pilot installation, not part of the dom
 - `Domain` and `Application` must not call WordPress or SQL.
 - Confirmed results are the source of truth; standings and statistics are rebuildable projections.
 - Gutenberg blocks are the primary public presentation API. Shortcodes are compatibility adapters only.
+- Public data must be exportable and verifiable on independent archive mirrors and Rally nodes; the initial replication model uses one authoritative publisher and read-only replicas.
 
 ## Documentation
 
@@ -24,6 +25,7 @@ Rally is a generic product. STKB.rs is a pilot installation, not part of the dom
 - [Changelog](CHANGELOG.md)
 - [Roadmap](docs/product/ROADMAP.md)
 - [Architecture decisions](docs/adr/)
+- [Distributed data and continuity decision](docs/adr/0004-distributed-data-and-continuity.md)
 
 ## Development
 

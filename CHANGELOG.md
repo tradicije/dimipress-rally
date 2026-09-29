@@ -8,6 +8,7 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and
 
 ### Added
 
+- Architecture decision and constraints for verifiable public data exports, read-only replicas, signing-key recovery, and continuity beyond Stoni.rs.
 - Team-match roster, singles-lineup, doubles-lineup, and substitution-window domain models.
 - `FirstToFourTeamMatch` domain aggregate for the initial fixed rubber order, early completion, and conditional doubles rubber.
 - `IndividualMatch` domain aggregate for best-of-five-set singles and doubles rubbers.
