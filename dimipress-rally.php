@@ -5,7 +5,8 @@
  * Version: 0.1.0-dev
  * Requires at least: 6.6
  * Requires PHP: 8.2
- * Author: DimiPress
+ * Author: Aleksa Dimitrijević
+ * Author URI: https://dimitrium.org/en/dimipedia/aleksa-dimitrijevic
  * License: AGPL-3.0-or-later
  * License URI: https://www.gnu.org/licenses/agpl-3.0.html
  * Text Domain: dimipress-rally
